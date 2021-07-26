@@ -1,6 +1,5 @@
 package com.vladislav07.weather.ui.fragments.adapter
 
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import com.vladislav07.weather.R
 import com.vladislav07.weather.ui.model.WeatherUI
 
 class HorizontalWeatherAdapter (
-    private val listWeatherForDay: List<WeatherUI>
+    listWeatherForDay: List<WeatherUI>
 ) : RecyclerView.Adapter<HorizontalWeatherAdapter.RecipeViewHolder>() {
 
     private val listWeather = listWeatherForDay
@@ -33,9 +32,9 @@ class HorizontalWeatherAdapter (
         viewType: Int
     ): RecipeViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.weather_horizontal_item, parent, false)
-        val holder = RecipeViewHolder(itemView)
-        return holder
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.weather_horizontal_item, parent, false)
+        return RecipeViewHolder(itemView)
     }
 
     override fun onBindViewHolder(

@@ -17,9 +17,10 @@ class MainActivity : FragmentActivity() {
         setContentView(R.layout.activity_main)
         val cityList = mutableListOf<String>()
         cityList.add("Minsk")
-        cityList.add("London")
+        cityList.add("Brest")
         fragmentsAdapter = FragmentsAdapter(this,cityList)
         fragmentPager.adapter = fragmentsAdapter
+        fragmentPager.isUserInputEnabled = false
         TabLayoutMediator(tabLayout,fragmentPager) {tab, position->
             tab.text = cityList[position]
         }.attach()

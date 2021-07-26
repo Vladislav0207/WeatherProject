@@ -6,5 +6,6 @@ import io.reactivex.Single
 interface WeatherInteractor {
     fun getWeather(cityName: String)
     fun getShortWeatherForDay(dayNumber: Int, cityName: String)
-    fun getAllWeatherForDay(dayNumber: Int, cityName: String): Single<List<WeatherDomain>>
+    fun getAllWeatherForFiveDays(cityName: String): Single<Map<Int,List<WeatherDomain>>>
+
 }

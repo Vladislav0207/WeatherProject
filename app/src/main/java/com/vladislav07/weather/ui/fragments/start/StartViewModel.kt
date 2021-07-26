@@ -11,9 +11,9 @@ import io.reactivex.Single
 class StartViewModel(private val weatherInteractorImpl: WeatherInteractorImpl) : ViewModel() {
 
 
-    fun getAllWeatherForDay(numberDay: Int, cityName: String): Single<List<WeatherUI>> {
-       return weatherInteractorImpl.getAllWeatherForDay(numberDay, cityName)
-           .map { list -> list.map { it.toWeatherUI() } }
+    fun getAllWeatherForFiveDays(cityName: String): Single<Map<Int,List<WeatherUI>>> {
+       return weatherInteractorImpl.getAllWeatherForFiveDays(cityName)
+           .map { map -> map.mapValues { entry -> entry.value.map { it.toWeatherUI() } } }
            .doOnError {
                Log.e("ViewModelStart",it.localizedMessage!!.toString())
            }

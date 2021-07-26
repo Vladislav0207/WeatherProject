@@ -12,6 +12,7 @@ import com.vladislav07.weather.R
 import com.vladislav07.weather.domain.WeatherInteractorImpl
 import com.vladislav07.weather.network.repository.NetworkRepositoryImpl
 import com.vladislav07.weather.ui.fragments.adapter.HorizontalWeatherAdapter
+import com.vladislav07.weather.ui.fragments.adapter.VerticalWeatherAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -41,18 +42,17 @@ class StartFragment : Fragment() {
             cityName = getString(ARG_OBJECT)
         }
         val compositeDisposable = CompositeDisposable()
-        cityName?.let { cityName ->
-            compositeDisposable.add(viewModel.getAllWeatherForDay(1, cityName)
+        cityName?.let { city ->
+            compositeDisposable.add(viewModel.getAllWeatherForFiveDays(city)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     {
-                        val horizontalAdapter = HorizontalWeatherAdapter(it)
-                        recycler.layoutManager =
-                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                        recycler.adapter = horizontalAdapter
+                        val verticalAdapter = VerticalWeatherAdapter(it, context)
+                        verticalWeatherRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                        verticalWeatherRecycler.adapter = verticalAdapter
                     }, {
-                        Log.e("Fragment", it.localizedMessage!!.toString())
+                        Log.e("StartFragment", it.localizedMessage!!.toString())
                         it.printStackTrace()
                     }
                 )

@@ -10,5 +10,6 @@ data class WeatherDomain(
     val humidity: Int,
     val pressure: Int,
     val date: String,
-    val time: String
+    val time: String,
+    var dayNumber: Int = 0
 )

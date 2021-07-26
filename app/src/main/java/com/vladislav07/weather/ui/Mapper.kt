@@ -13,5 +13,6 @@ fun WeatherDomain.toWeatherUI() =
         "$humidity%",
         "$pressure гПа",
         date,
-        time
+        time,
+        dayNumber
     )

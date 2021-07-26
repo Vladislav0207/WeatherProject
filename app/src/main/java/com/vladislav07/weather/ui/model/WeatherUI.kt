@@ -9,5 +9,6 @@ data class WeatherUI(
     val humidity: String,
     val pressure: String,
     val date: String,
-    val time: String
+    val time: String,
+    val dayNumber: Int
 )
