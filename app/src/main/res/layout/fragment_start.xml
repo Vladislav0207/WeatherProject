@@ -8,7 +8,7 @@
     tools:context=".ui.fragments.start.StartFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@color/white"
+        android:background="@color/whiteLite"
         android:id="@+id/verticalWeatherRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

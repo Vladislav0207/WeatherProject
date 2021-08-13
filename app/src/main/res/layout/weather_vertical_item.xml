@@ -1,45 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:background="@color/cardview_light_background">
+    android:background="@color/whiteLite"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/grey"
-        app:cardCornerRadius="30dp"
-        >
-    <TextView
-        android:id="@+id/weatherDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/date"
-        android:gravity="center"
-        android:textSize="32sp"
-        android:background="@color/grey"
+        app:cardCornerRadius="8dp"
         android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="4dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:background="@color/grey"
-        android:id="@+id/horizontalWeatherRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/weatherDate"
-        tools:listitem="@layout/weather_horizontal_item"
-        app:layoutManager="LinearLayoutManager"
-         />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/weatherDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/grey"
+                android:gravity="center"
+                android:text="@string/date"
+                android:textSize="32sp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/greyLine"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/horizontalWeatherRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/grey"
+                android:orientation="horizontal"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weatherDate"
+                tools:listitem="@layout/weather_horizontal_item" />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
 
 </LinearLayout>
