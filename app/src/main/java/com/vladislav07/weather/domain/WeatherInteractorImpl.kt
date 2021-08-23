@@ -5,8 +5,8 @@ import com.vladislav07.weather.domain.model.WeatherDomain
 import io.reactivex.Single
 
 class WeatherInteractorImpl(private val networkRepository: NetworkRepository) : WeatherInteractor {
-    override fun getWeather(cityName: String) {
-        networkRepository.getWeather(cityName)
+    override fun getWeather(cityName: String): Single<WeatherDomain> {
+       return networkRepository.getWeather(cityName)
     }
 
     override fun getShortWeatherForDay(dayNumber: Int, cityName: String) {
@@ -30,7 +30,8 @@ private fun getListWeatherForFiveDays(
     for (index in allDaysWeather.indices) {
         allDaysWeather[index].dayNumber = dayCounter
 
-        if (allDaysWeather[index] != allDaysWeather.last() && allDaysWeather[index].date != allDaysWeather[index + 1].date) {
+        if (allDaysWeather[index] != allDaysWeather.last() &&
+            allDaysWeather[index].date != allDaysWeather[index + 1].date) {
             dayList.clear()
             dayCounter++
         }

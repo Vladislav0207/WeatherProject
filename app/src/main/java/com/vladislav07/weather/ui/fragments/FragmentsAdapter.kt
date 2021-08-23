@@ -13,11 +13,6 @@ class FragmentsAdapter(fragment : FragmentActivity,  cityList: MutableList<Strin
        return list.size
     }
 
-    fun addTab(title: String){
-        list.add(title)
-        notifyDataSetChanged()
-    }
-
     override fun createFragment(position: Int): Fragment {
         val fragment = StartFragment()
         fragment.arguments = Bundle().apply {

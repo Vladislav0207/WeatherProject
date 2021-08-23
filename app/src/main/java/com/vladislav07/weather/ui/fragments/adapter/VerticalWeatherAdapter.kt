@@ -4,21 +4,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import com.vladislav07.weather.R
 import com.vladislav07.weather.ui.model.WeatherUI
 
 class VerticalWeatherAdapter(
     private val weatherMap : Map<Int,List<WeatherUI>>,
     private val context: Context?
-) : RecyclerView.Adapter<VerticalWeatherAdapter.RecipeViewHolder>() {
+) : RecyclerView.Adapter<VerticalWeatherAdapter.WeatherViewHolder>() {
 
 
-    class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class WeatherViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val date: TextView = itemView.findViewById(R.id.weatherDate)
         val horizontalRecyclerView: RecyclerView = itemView.findViewById(R.id.horizontalWeatherRecycler)
     }
@@ -26,15 +24,15 @@ class VerticalWeatherAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecipeViewHolder {
+    ): WeatherViewHolder {
         val itemView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.weather_vertical_item, parent, false)
-        return RecipeViewHolder(itemView)
+        return WeatherViewHolder(itemView)
     }
 
     override fun onBindViewHolder(
-        holder: RecipeViewHolder,
+        holder: WeatherViewHolder,
         position: Int
     ) {
         holder.date.text = weatherMap[position]?.get(0)?.date

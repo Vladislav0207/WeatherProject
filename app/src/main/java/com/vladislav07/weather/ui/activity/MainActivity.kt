@@ -21,9 +21,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : FragmentActivity() {
 
-    val networkRepository = NetworkRepositoryImpl()
-    val compositeDisposable = CompositeDisposable()
-    val weatherInteractorImpl = WeatherInteractorImpl(networkRepository)
+    private val networkRepository = NetworkRepositoryImpl()
+    private val weatherInteractorImpl = WeatherInteractorImpl(networkRepository)
     val viewModel = ActivityViewModel(weatherInteractorImpl)
     private lateinit var fragmentsAdapter: FragmentsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,22 +50,17 @@ class MainActivity : FragmentActivity() {
 
         citySearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                compositeDisposable.add(
-                    viewModel.getAllWeatherForFiveDays(query!!)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({
-                            viewModel.addToCityList(query)
-                            addTab(query)
-                            citySearch.setQuery("", false)
-                        }, {
-                            Toast.makeText(
-                                applicationContext,
-                                "Город не найден",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        })
-                )
+                if (viewModel.getWeather(query!!)) {
+                    viewModel.addToCityList(query)
+                    addTab(query)
+                    citySearch.setQuery("", false)
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        "Город не найден",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
                 return false
             }
 

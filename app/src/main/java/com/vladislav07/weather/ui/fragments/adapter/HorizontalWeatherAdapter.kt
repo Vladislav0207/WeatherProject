@@ -12,11 +12,11 @@ import com.vladislav07.weather.ui.model.WeatherUI
 
 class HorizontalWeatherAdapter (
     listWeatherForDay: List<WeatherUI>
-) : RecyclerView.Adapter<HorizontalWeatherAdapter.RecipeViewHolder>() {
+) : RecyclerView.Adapter<HorizontalWeatherAdapter.WeatherViewHolder>() {
 
     private val listWeather = listWeatherForDay
 
-    class RecipeViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class WeatherViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
         val time : TextView = itemView.findViewById(R.id.weatherTime)
         val temp: TextView = itemView.findViewById(R.id.temperature)
         val tempFeels : TextView = itemView.findViewById(R.id.temperatureFeels)
@@ -30,15 +30,15 @@ class HorizontalWeatherAdapter (
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecipeViewHolder {
+    ): WeatherViewHolder {
         val itemView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.weather_horizontal_item, parent, false)
-        return RecipeViewHolder(itemView)
+        return WeatherViewHolder(itemView)
     }
 
     override fun onBindViewHolder(
-        holder: RecipeViewHolder,
+        holder: WeatherViewHolder,
         position: Int
     ) {
         holder.time.text = listWeather[position].time

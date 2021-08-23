@@ -37,26 +37,20 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var cityName :String? = null
+        var cityName: String? = null
         arguments?.takeIf { it.containsKey(ARG_OBJECT) }?.apply {
             cityName = getString(ARG_OBJECT)
         }
-        val compositeDisposable = CompositeDisposable()
+
         cityName?.let { city ->
-            compositeDisposable.add(viewModel.getAllWeatherForFiveDays(city)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    {
-                        val verticalAdapter = VerticalWeatherAdapter(it, context)
-                        verticalWeatherRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                        verticalWeatherRecycler.adapter = verticalAdapter
-                    }, {
-                        Log.e("StartFragment", it.localizedMessage!!.toString())
-                        it.printStackTrace()
-                    }
-                )
-            )
+            viewModel.getAllWeatherForFiveDays(city)
+            val mapWeather = viewModel.mapWeatherFiveDayLiveData.value
+            mapWeather?.let {
+                val verticalAdapter = VerticalWeatherAdapter(it, context)
+                verticalWeatherRecycler.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                verticalWeatherRecycler.adapter = verticalAdapter
+            }
         }
     }
 }
